@@ -48,10 +48,13 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-
     - name: Update Databricks Git folder
       run: |
-        databricks repos update ${{env.REPO_PATH}} --branch "${{ steps.extract_branch.outputs.branch }}"
+        databricks bundle deploye --target development
+    
+    #- name: Update Databricks Git folder
+    #  run: |
+    #    databricks repos update ${{env.REPO_PATH}} --branch "${{ steps.extract_branch.outputs.branch }}"
 
     # - name: Build Wheel and send to Databricks DBFS workspace location
     #   run: |
